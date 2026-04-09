@@ -1,0 +1,6 @@
+@NexSure_HostAddress = http://localhost:5122
+
+GET {{NexSure_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
