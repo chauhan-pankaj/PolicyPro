@@ -1,0 +1,74 @@
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded-xl">
+
+  <h2 class="text-2xl font-bold mb-4 text-center">
+    Health Insurance Quote
+  </h2>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage()" class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+    {{ errorMessage() }}
+  </div>
+
+  <!-- Age -->
+  <input type="number"
+         [(ngModel)]="formData.age"
+         [disabled]="isLoading()"
+         class="w-full mb-3 p-2 border rounded disabled:bg-gray-100"
+         placeholder="Age" />
+
+  <!-- Gender -->
+  <select [(ngModel)]="formData.gender"
+      [disabled]="isLoading()"
+          class="w-full mb-3 p-2 border rounded disabled:bg-gray-100">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+
+  <!-- City -->
+  <input [(ngModel)]="formData.city"
+      [disabled]="isLoading()"
+         class="w-full mb-3 p-2 border rounded disabled:bg-gray-100"
+         placeholder="City" />
+
+  <!-- Sum Insured -->
+  <select [(ngModel)]="formData.sumInsured"
+      [disabled]="isLoading()"
+          class="w-full mb-3 p-2 border rounded disabled:bg-gray-100">
+    <option [value]="300000">3 Lakh</option>
+    <option [value]="500000">5 Lakh</option>
+    <option [value]="1000000">10 Lakh</option>
+  </select>
+
+  <!-- Policy Term -->
+  <select [(ngModel)]="formData.policyTerm"
+      [disabled]="isLoading()"
+          class="w-full mb-3 p-2 border rounded disabled:bg-gray-100">
+    <option [value]="1">1 Year</option>
+    <option [value]="2">2 Years</option>
+  </select>
+
+  <!-- Button -->
+  <button (click)="getQuote()"
+          [disabled]="isLoading()"
+          class="w-full bg-blue-600 text-white p-2 rounded enabled:hover:bg-blue-700 disabled:bg-gray-400">
+    {{ isLoading() ? 'Loading...' : 'Get Quote' }}
+  </button>
+
+</div>
+
+<!-- Plans -->
+<div class="max-w-5xl mx-auto mt-8 grid grid-cols-3 gap-4">
+
+  <div *ngFor="let plan of plans()"
+       class="p-4 bg-white shadow rounded-lg hover:shadow-lg transition">
+
+    <h3 class="text-lg font-semibold mb-2">{{ plan.planName }}</h3>
+    <p class="text-gray-600">Premium: ₹{{ plan.premium | number }}</p>
+
+  </div>
+
+  <div *ngIf="plans().length === 0 && !isLoading()" class="col-span-3 text-center text-gray-500 p-8">
+    No quotes available. Submit the form to get started.
+  </div>
+
+</div>
