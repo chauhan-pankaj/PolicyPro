@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "ENCRYPTED_CONNECTION_STRING_PLACEHOLDER"
+    "DefaultConnection": "PASTE_YOUR_ENCRYPTED_CONNECTION_STRING_HERE"
   },
   "Logging": {
     "LogLevel": {
@@ -11,8 +11,8 @@
   },
   "AllowedHosts": "*",
   "Security": {
-    "EncryptionKey": "NexSure@2026SecureKey#X9pL2mQ8vR4tZ",
-    "ApiKey": "NEXSURE-API-KEY-2026-9XKLM42PQR",
+    "EncryptionKey": "CHANGE_ME_TO_SECURE_KEY_AT_LEAST_32_CHARS_LONG_IN_PRODUCTION",
+    "ApiKey": "CHANGE_ME_TO_UNIQUE_API_KEY_IN_PRODUCTION",
     "IsConnectionStringEncrypted": true
   }
 }

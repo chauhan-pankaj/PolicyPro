@@ -36,8 +36,11 @@ namespace NexSure.Repository
 
         public async Task<decimal> CalculatePremiumAsync(HealthQuoteRequest request, decimal multiplier)
         {
-            // Premium calculation logic
-            return await Task.FromResult((request.SumInsured * multiplier / 100000) * (1 + (request.Age / 100m)));
+            // Calculate average age from all members
+            decimal averageAge = (decimal)request.Members.Average(m => m.Age);
+
+            // Premium calculation logic based on average age and sum insured
+            return await Task.FromResult((request.SumInsured * multiplier / 100000) * (1 + (averageAge / 100m)));
         }
     }
 }
