@@ -1,9 +1,17 @@
 using Microsoft.OpenApi;
+using NexSure.Controllers.Interface;
+using NexSure.Repository;
+using NexSure.Repository.Interface;
+using NexSure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // 🔹 Add services
 builder.Services.AddControllers();
+
+// 🔹 Register Repository and Service for Dependency Injection
+builder.Services.AddScoped<IHealthQuoteRepository, HealthQuoteRepository>();
+builder.Services.AddScoped<INexSureController, NexSureService>();
 
 // 🔥 Swagger / OpenAPI Configuration
 builder.Services.AddEndpointsApiExplorer();
