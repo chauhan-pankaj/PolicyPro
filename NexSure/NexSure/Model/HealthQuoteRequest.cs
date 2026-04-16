@@ -19,6 +19,7 @@
         public int PolicyTerm { get; set; }
 
         public string PlanType { get; set; }
+        public string CouponCode { get; set; }
     }
     public class Member
     {

@@ -18,7 +18,7 @@ namespace NexSure.Utilities
             string plainConnectionString = "Server=(localdb)\\MSSQLLocalDB;Database=NexSure;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;";
 
             // Your encryption key from appsettings.json
-            string encryptionKey = "CHANGE_ME_TO_SECURE_KEY_AT_LEAST_32_CHARS_LONG_IN_PRODUCTION";
+            string encryptionKey = "NexSure@2026SecureKey#X9pL2mQ8vR4tZ";
 
             try
             {
