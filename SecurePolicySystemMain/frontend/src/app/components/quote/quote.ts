@@ -1,83 +1,106 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { SelectModule } from 'primeng/select';
 
-// Local types to avoid a hard dependency on the external service file
-export interface QuoteRequest {
-  age: number;
-  gender: string;
-  city: string;
-  sumInsured: number;
-  policyTerm: number;
-}
-
-export interface QuotePlan {
-  planName: string;
-  premium: number;
-}
-
-export interface QuoteResponse {
-  plans: QuotePlan[];
+interface DropdownOption {
+  label: string;
+  value: string | number;
 }
 
 @Component({
   selector: 'app-quote',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SelectModule
+  ],
   templateUrl: './quote.html',
   styleUrls: ['./quote.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuoteComponent {
+  quoteForm: FormGroup;
+  isSubmitted = false;
 
-  private readonly apiUrl = 'https://localhost:7257/api/quotes';
+  coverOptions: DropdownOption[] = [
+    { label: 'Self Only', value: 'self' },
+    { label: 'Self + Spouse', value: 'family' },
+    { label: 'Family', value: 'full-family' }
+  ];
 
-  formData: QuoteRequest = {
-    age: 30,
-    gender: 'Male',
-    city: 'Delhi',
-    sumInsured: 500000,
-    policyTerm: 1
-  };
-  plans = signal<QuotePlan[]>([]);
-  isLoading = signal(false);
-  errorMessage = signal<string | null>(null);
+  sumInsuredOptions: DropdownOption[] = [
+    { label: '₹3 Lakh', value: 300000 },
+    { label: '₹5 Lakh', value: 500000 },
+    { label: '₹10 Lakh', value: 1000000 },
+    { label: '₹20 Lakh', value: 2000000 }
+  ];
 
-  constructor(private http: HttpClient) {}
-
-  getQuote(): void {
-    if (!this.validateFormData()) return;
-
-    this.isLoading.set(true);
-    this.errorMessage.set(null);
-    this.plans.set([]);
-
-    console.log('Request:', this.formData);
-
-    this.http.post<QuoteResponse>(this.apiUrl, this.formData).subscribe({
-      next: (res) => {
-        console.log('Response:', res);
-        this.plans.set(res.plans ?? []);
-        this.isLoading.set(false);
-      },
-      error: (err: any) => {
-        console.error('API Error:', err);
-        this.errorMessage.set('Failed to fetch quotes. Please try again later.');
-        this.isLoading.set(false);
-      }
+  constructor(private fb: FormBuilder) {
+    this.quoteForm = this.fb.group({
+      fullName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(100)
+        ]
+      ],
+      mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[6-9]\d{9}$/)
+        ]
+      ],
+      dob: [
+        '',
+        Validators.required
+      ],
+      coverFor: [
+        null,
+        Validators.required
+      ],
+      pincode: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{6}$/)
+        ]
+      ],
+      sumInsured: [
+        null,
+        Validators.required
+      ]
     });
   }
 
-  private validateFormData(): boolean {
-    if (this.formData.age < 18 || this.formData.age > 70) {
-      this.errorMessage.set('Age must be between 18 and 70.');
-      return false;
+  get controls() {
+    return this.quoteForm.controls;
+  }
+
+  getQuote(): void {
+    this.isSubmitted = true;
+
+    if (this.quoteForm.invalid) {
+      this.quoteForm.markAllAsTouched();
+      return;
     }
-    if (this.formData.sumInsured < 300000) {
-      this.errorMessage.set('Minimum sum insured is ₹3 Lakh.');
-      return false;
-    }
-    return true;
+
+    const payload = {
+      ...this.quoteForm.value
+    };
+
+    console.log('Quote Request Payload:', payload);
+
+    // Replace this with actual API call
+    // this.quoteService.getPlans(payload).subscribe(...)
+
+    alert('Plans fetched successfully!');
   }
 }

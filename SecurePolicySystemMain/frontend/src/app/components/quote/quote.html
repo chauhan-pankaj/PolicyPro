@@ -1,74 +1,156 @@
-<div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded-xl">
+<div class="quote-page">
+    <!-- Header/Navigation -->
+    <header class="quote-header-nav">
+        <div class="header-container">
+            <div class="logo">SureCover</div>
+            <nav class="nav-links">
+                <a href="#">Health Insurance</a>
+                <a href="#">Car Insurance</a>
+                <a href="#">Term Life</a>
+                <a href="#">Travel Insurance</a>
+                <a href="#" class="login-btn">Login</a>
+            </nav>
+        </div>
+    </header>
 
-  <h2 class="text-2xl font-bold mb-4 text-center">
-    Health Insurance Quote
-  </h2>
+    <!-- Hero Section -->
+    <section class="quote-hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Compare & Buy Health Insurance</h1>
+                <p class="hero-subtitle">India's most trusted insurance marketplace</p>
+                
+                <div class="trust-metrics">
+                    <div class="metric">
+                        <span class="metric-value">50+</span>
+                        <span class="metric-label">Insurers</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">10M+</span>
+                        <span class="metric-label">Happy Customers</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">70%</span>
+                        <span class="metric-label">Save on Premium</span>
+                    </div>
+                </div>
+            </div>
 
-  <!-- Error Message -->
-  <div *ngIf="errorMessage()" class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-    {{ errorMessage() }}
-  </div>
+            <!-- Main Form Card -->
+            <div class="quote-form-wrapper">
+                <div class="form-header">
+                    <h2>Get Your Health Insurance Quote</h2>
+                    <p>Fill in your details to compare plans from top insurers</p>
+                </div>
 
-  <!-- Age -->
-  <input type="number"
-         [(ngModel)]="formData.age"
-         [disabled]="isLoading()"
-         class="w-full mb-3 p-2 border rounded disabled:bg-gray-100"
-         placeholder="Age" />
+                <form [formGroup]="quoteForm" (ngSubmit)="getQuote()" class="quote-form">
+                    
+                    <!-- Row 1: Full Name & Mobile -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input
+                                id="fullName"
+                                type="text"
+                                formControlName="fullName"
+                                placeholder="Enter your name"
+                                class="form-input">
+                            <span class="error-text" *ngIf="controls['fullName'].touched && controls['fullName'].invalid">
+                                Full name is required
+                            </span>
+                        </div>
 
-  <!-- Gender -->
-  <select [(ngModel)]="formData.gender"
-      [disabled]="isLoading()"
-          class="w-full mb-3 p-2 border rounded disabled:bg-gray-100">
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-  </select>
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number *</label>
+                            <input
+                                id="mobile"
+                                type="text"
+                                formControlName="mobile"
+                                placeholder="10-digit mobile"
+                                class="form-input">
+                            <span class="error-text" *ngIf="controls['mobile'].touched && controls['mobile'].invalid">
+                                Enter valid 10-digit mobile number
+                            </span>
+                        </div>
+                    </div>
 
-  <!-- City -->
-  <input [(ngModel)]="formData.city"
-      [disabled]="isLoading()"
-         class="w-full mb-3 p-2 border rounded disabled:bg-gray-100"
-         placeholder="City" />
+                    <!-- Row 2: DOB & Cover For -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth *</label>
+                            <input
+                                id="dob"
+                                type="date"
+                                formControlName="dob"
+                                class="form-input">
+                            <span class="error-text" *ngIf="controls['dob'].touched && controls['dob'].invalid">
+                                Date of birth is required
+                            </span>
+                        </div>
 
-  <!-- Sum Insured -->
-  <select [(ngModel)]="formData.sumInsured"
-      [disabled]="isLoading()"
-          class="w-full mb-3 p-2 border rounded disabled:bg-gray-100">
-    <option [value]="300000">3 Lakh</option>
-    <option [value]="500000">5 Lakh</option>
-    <option [value]="1000000">10 Lakh</option>
-  </select>
+                        <div class="form-group">
+                            <label for="coverFor">Cover For *</label>
+                            <p-select
+                                id="coverFor"
+                                [options]="coverOptions"
+                                formControlName="coverFor"
+                                optionLabel="label"
+                                optionValue="value"
+                                placeholder="Select coverage"
+                                class="form-select">
+                            </p-select>
+                            <span class="error-text" *ngIf="controls['coverFor'].touched && controls['coverFor'].invalid">
+                                Please select coverage type
+                            </span>
+                        </div>
+                    </div>
 
-  <!-- Policy Term -->
-  <select [(ngModel)]="formData.policyTerm"
-      [disabled]="isLoading()"
-          class="w-full mb-3 p-2 border rounded disabled:bg-gray-100">
-    <option [value]="1">1 Year</option>
-    <option [value]="2">2 Years</option>
-  </select>
+                    <!-- Row 3: Pincode & Sum Insured -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pincode">Pincode *</label>
+                            <input
+                                id="pincode"
+                                type="text"
+                                formControlName="pincode"
+                                placeholder="6-digit pincode"
+                                class="form-input">
+                            <span class="error-text" *ngIf="controls['pincode'].touched && controls['pincode'].invalid">
+                                Enter valid 6-digit pincode
+                            </span>
+                        </div>
 
-  <!-- Button -->
-  <button (click)="getQuote()"
-          [disabled]="isLoading()"
-          class="w-full bg-blue-600 text-white p-2 rounded enabled:hover:bg-blue-700 disabled:bg-gray-400">
-    {{ isLoading() ? 'Loading...' : 'Get Quote' }}
-  </button>
+                        <div class="form-group">
+                            <label for="sumInsured">Sum Insured *</label>
+                            <p-select
+                                id="sumInsured"
+                                [options]="sumInsuredOptions"
+                                formControlName="sumInsured"
+                                optionLabel="label"
+                                optionValue="value"
+                                placeholder="Select amount"
+                                class="form-select">
+                            </p-select>
+                            <span class="error-text" *ngIf="controls['sumInsured'].touched && controls['sumInsured'].invalid">
+                                Please select sum insured
+                            </span>
+                        </div>
+                    </div>
 
-</div>
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">
+                        Compare Plans & Get Quotes
+                        <span class="arrow">→</span>
+                    </button>
 
-<!-- Plans -->
-<div class="max-w-5xl mx-auto mt-8 grid grid-cols-3 gap-4">
+                </form>
 
-  <div *ngFor="let plan of plans()"
-       class="p-4 bg-white shadow rounded-lg hover:shadow-lg transition">
-
-    <h3 class="text-lg font-semibold mb-2">{{ plan.planName }}</h3>
-    <p class="text-gray-600">Premium: ₹{{ plan.premium | number }}</p>
-
-  </div>
-
-  <div *ngIf="plans().length === 0 && !isLoading()" class="col-span-3 text-center text-gray-500 p-8">
-    No quotes available. Submit the form to get started.
-  </div>
+                <div class="form-footer">
+                    <p>✓ 100% Secure & Confidential</p>
+                    <p>✓ Free Comparison</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 </div>

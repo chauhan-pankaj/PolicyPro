@@ -1,0 +1,409 @@
+// ===== SCSS Variables =====
+$primary-color: #003cda; // Professional Blue
+$secondary-color: #f97316; // Orange
+$success-color: #16a34a; // Green
+$danger-color: #dc2626; // Red
+$bg-light: #f8fafc; // Off-white
+$bg-lighter: #ffffff; // Pure white
+$border-color: #e2e8f0; // Light gray
+$text-dark: #1e293b; // Dark gray
+$text-muted: #64748b; // Muted gray
+$text-light: #94a3b8; // Light gray
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.12);
+
+// ===== Breakpoints =====
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+
+// ===== Base Styles =====
+* {
+  box-sizing: border-box;
+}
+
+.quote-page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  color: $text-dark;
+  background-color: $bg-light;
+}
+
+// ===== Header/Navigation =====
+.quote-header-nav {
+  background: $bg-lighter;
+  border-bottom: 1px solid $border-color;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-color;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: $text-muted;
+      font-weight: 500;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      &.login-btn {
+        padding: 0.5rem 1.25rem;
+        background: $primary-color;
+        color: white;
+        border-radius: 4px;
+        font-weight: 600;
+
+        &:hover {
+          color: white;
+          background: darken($primary-color, 5%);
+        }
+      }
+    }
+  }
+}
+
+// ===== Hero Section =====
+.quote-hero {
+  background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 8%) 100%);
+  color: white;
+  padding: 3rem 2rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+
+  .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-content {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+
+      @media (max-width: 768px) {
+        font-size: 1.8rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 0 2rem 0;
+      font-weight: 400;
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .trust-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      gap: 2rem;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .metric-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      .metric-label {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// ===== Form Wrapper =====
+.quote-form-wrapper {
+  background: $bg-lighter;
+  border-radius: 12px;
+  box-shadow: $shadow-lg;
+  padding: 3rem;
+  max-width: 900px;
+  margin: -2rem auto 2rem;
+  position: relative;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    margin: -1.5rem 0 1rem;
+    border-radius: 8px;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      color: $text-dark;
+    }
+
+    p {
+      font-size: 1rem;
+      color: $text-muted;
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+}
+
+// ===== Form Styles =====
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $text-dark;
+      display: block;
+    }
+
+    .form-input,
+    .form-select {
+      padding: 0.875rem 1rem;
+      border: 1.5px solid $border-color;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: $bg-lighter;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      }
+
+      &::placeholder {
+        color: $text-light;
+      }
+    }
+
+    .form-select {
+      padding: 0;
+    }
+
+    .error-text {
+      font-size: 0.85rem;
+      color: $danger-color;
+      font-weight: 500;
+      margin-top: -0.25rem;
+    }
+  }
+
+  .submit-btn {
+    padding: 1rem 2rem;
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &:hover {
+      background: darken($primary-color, 5%);
+      box-shadow: $shadow-md;
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    .arrow {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.form-footer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid $border-color;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $text-muted;
+    margin: 0;
+    font-weight: 500;
+
+    &::before {
+      content: '';
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// ===== PrimeNG Select Overrides =====
+:host ::ng-deep {
+  .form-select.p-select {
+    display: flex;
+    width: 100%;
+    background: $bg-lighter;
+    border: 1.5px solid $border-color;
+    border-radius: 6px;
+    padding: 0;
+    transition: all 0.3s ease;
+
+    &:not(.p-disabled):hover {
+      border-color: darken($border-color, 8%);
+    }
+
+    &.p-focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+    }
+
+    .p-select-label {
+      padding: 0.875rem 1rem;
+      color: $text-dark;
+      font-size: 1rem;
+
+      &.p-placeholder {
+        color: $text-light;
+      }
+    }
+
+    .p-select-dropdown {
+      width: auto;
+      padding: 0 1rem;
+      background: transparent;
+      border: none;
+      color: $text-muted;
+    }
+  }
+
+  .p-select-overlay {
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    box-shadow: $shadow-lg;
+    background: $bg-lighter;
+  }
+
+  .p-select-list {
+    padding: 0.5rem 0;
+  }
+
+  .p-select-option {
+    padding: 0.75rem 1rem;
+    color: $text-dark;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+    }
+
+    &.p-select-option-selected {
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+      font-weight: 600;
+    }
+
+    &.p-focus {
+      background-color: rgba($primary-color, 0.08);
+    }
+  }
+
+  .p-select-option-group {
+    padding: 0.75rem 1rem;
+    background: $bg-light;
+    color: $text-muted;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+}
