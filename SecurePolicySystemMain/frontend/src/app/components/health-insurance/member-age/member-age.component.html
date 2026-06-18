@@ -1,0 +1,43 @@
+<div class="member-age">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2 class="page-title">Select age of covered member(s)</h2>
+    <p class="page-subtitle">This helps us calculate the right premium for you</p>
+  </div>
+
+  <!-- Age Selection Grid -->
+  <div class="age-grid">
+    <div class="age-item" *ngFor="let label of memberLabels; let i = index">
+      <label class="age-label">{{ label }}</label>
+      <select
+        class="age-select"
+        [value]="getMemberAge(i) || ''"
+        (change)="setAge(i, +$any($event.target).value)">
+        <option value="" disabled>Select Age</option>
+        <option *ngFor="let age of getAges()" [value]="age">
+          {{ age }} years
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Info Card -->
+  <div class="info-card">
+    <div class="info-icon">ℹ️</div>
+    <div class="info-content">
+      <h3 class="info-title">Best Pricing</h3>
+      <p class="info-text">Age-based premium calculation ensures you get the most accurate quote</p>
+    </div>
+  </div>
+
+  <!-- Continue Button -->
+  <div class="action-buttons">
+    <button
+      class="btn-continue"
+      (click)="continue()"
+      [disabled]="!canContinue()"
+      type="button">
+      Continue →
+    </button>
+  </div>
+</div>

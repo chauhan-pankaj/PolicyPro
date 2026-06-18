@@ -1,0 +1,155 @@
+<div class="home-page">
+  <!-- Header/Navigation -->
+  <header class="sticky-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <button class="logo" (click)="goHome()" type="button">SureCover</button>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-link" (click)="navigateToInsurance('health')" type="button">Health Insurance</button>
+        <button class="nav-link" (click)="goHome()" type="button">Car Insurance</button>
+        <button class="nav-link" (click)="goHome()" type="button">Term Life</button>
+        <button class="nav-link" (click)="goHome()" type="button">Travel Insurance</button>
+      </nav>
+
+      <button class="login-btn" (click)="openLoginModal()" type="button">Login</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Compare & Buy Health Insurance</h1>
+        <p class="hero-subtitle">India's most trusted insurance marketplace</p>
+
+        <!-- Statistics -->
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Insurers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">10M+</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">70%</div>
+            <div class="stat-label">Save on Premium</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurance Categories Section -->
+  <section class="categories-section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Insurance Categories</h2>
+        <p class="section-subtitle">Explore comprehensive insurance solutions</p>
+      </div>
+
+      <div class="categories-grid">
+        <button 
+          class="category-card" 
+          *ngFor="let category of categories()"
+          (click)="navigateToInsurance(category.id)"
+          type="button">
+          <div class="category-icon">{{ category.icon }}</div>
+          <h3 class="category-title">{{ category.title }}</h3>
+          <p class="category-description">{{ category.description }}</p>
+          <span class="category-link">Explore →</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose SureCover Section -->
+  <section class="why-surecover-section" id="why-choose">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose SureCover?</h2>
+        <p class="section-subtitle">India's most trusted insurance marketplace</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card" *ngFor="let item of whyChooseItems()">
+          <div class="why-icon">{{ item.icon }}</div>
+          <h3 class="why-title">{{ item.title }}</h3>
+          <p class="why-description">{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Calculators Section -->
+  <section class="calculators-section" id="calculators">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Popular Calculators</h2>
+        <p class="section-subtitle">Plan your financial future</p>
+      </div>
+
+      <div class="calculators-grid">
+        <div class="calculator-card" *ngFor="let calc of calculators()">
+          <div class="calc-icon">{{ calc.icon }}</div>
+          <h3 class="calc-title">{{ calc.title }}</h3>
+          <p class="calc-description">{{ calc.description }}</p>
+          <a href="#" class="calc-link">Use Calculator →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Testimonials Section -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-subtitle">Real stories from real customers</p>
+      </div>
+
+      <div class="testimonial-carousel">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <span class="star" *ngFor="let _ of getRatingStars(currentTestimonial().rating)">★</span>
+          </div>
+          <p class="testimonial-comment">"{{ currentTestimonial().comment }}"</p>
+          <p class="testimonial-author">- {{ currentTestimonial().name }}</p>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn prev" (click)="previousTestimonial()" type="button">← Prev</button>
+          <div class="carousel-dots">
+            <span
+              class="dot"
+              *ngFor="let testimonial of testimonials(); let i = index"
+              [class.active]="i === currentTestimonialIndex() % testimonials().length">
+            </span>
+          </div>
+          <button class="carousel-btn next" (click)="nextTestimonial()" type="button">Next →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Partners Section -->
+  <section class="partners-section" id="partners">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Partners</h2>
+        <p class="section-subtitle">20+ Insurance Companies</p>
+      </div>
+
+      <div class="partners-grid">
+        <div class="partner-logo" *ngFor="let partner of partners()">
+          <div class="logo-placeholder">{{ partner.logo }}</div>
+          <p class="partner-name">{{ partner.name }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

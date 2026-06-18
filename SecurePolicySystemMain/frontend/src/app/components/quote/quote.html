@@ -8,7 +8,7 @@
                 <a href="#">Car Insurance</a>
                 <a href="#">Term Life</a>
                 <a href="#">Travel Insurance</a>
-                <a href="#" class="login-btn">Login</a>
+                <button class="login-btn" (click)="openLoginModal()" type="button">Login</button>
             </nav>
         </div>
     </header>
@@ -43,33 +43,48 @@
                     <p>Fill in your details to compare plans from top insurers</p>
                 </div>
 
-                <form [formGroup]="quoteForm" (ngSubmit)="getQuote()" class="quote-form">
+                <!-- Success Message -->
+                <div class="success-message" *ngIf="showSuccessMessage">
+                    <span class="success-icon">✓</span>
+                    <span>Quote request submitted successfully!</span>
+                </div>
+
+                <!-- Form -->
+                <form [formGroup]="quoteForm" (ngSubmit)="getQuote()" class="quote-form" *ngIf="!showSuccessMessage">
                     
                     <!-- Row 1: Full Name & Mobile -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="fullName">Full Name *</label>
+                            <label for="fullName" class="form-label">Full Name *</label>
                             <input
                                 id="fullName"
                                 type="text"
                                 formControlName="fullName"
                                 placeholder="Enter your name"
-                                class="form-input">
-                            <span class="error-text" *ngIf="controls['fullName'].touched && controls['fullName'].invalid">
+                                class="form-input"
+                                [class.input-error]="fullNameControl.touched && fullNameControl.invalid">
+                            <!-- Show specific error messages -->
+                            <span class="error-text" *ngIf="fullNameControl.touched && fullNameControl.hasError('required')">
                                 Full name is required
+                            </span>
+                            <span class="error-text" *ngIf="fullNameControl.touched && fullNameControl.hasError('maxlength')">
+                                Full name cannot exceed 100 characters
                             </span>
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile">Mobile Number *</label>
+                            <label for="mobile" class="form-label">Mobile Number *</label>
                             <input
                                 id="mobile"
                                 type="text"
                                 formControlName="mobile"
                                 placeholder="10-digit mobile"
-                                class="form-input">
-                            <span class="error-text" *ngIf="controls['mobile'].touched && controls['mobile'].invalid">
-                                Enter valid 10-digit mobile number
+                                maxlength="10"
+                                class="form-input"
+                                (input)="onlyDigits($event)"
+                                [class.input-error]="mobileControl.touched && mobileControl.invalid">
+                            <span class="error-text" *ngIf="mobileControl.touched && mobileControl.invalid">
+                                Enter valid 10-digit mobile number (starts with 6-9)
                             </span>
                         </div>
                     </div>
@@ -77,19 +92,20 @@
                     <!-- Row 2: DOB & Cover For -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="dob">Date of Birth *</label>
+                            <label for="dob" class="form-label">Date of Birth *</label>
                             <input
                                 id="dob"
                                 type="date"
                                 formControlName="dob"
-                                class="form-input">
-                            <span class="error-text" *ngIf="controls['dob'].touched && controls['dob'].invalid">
+                                class="form-input"
+                                [class.input-error]="dobControl.touched && dobControl.invalid">
+                            <span class="error-text" *ngIf="dobControl.touched && dobControl.invalid">
                                 Date of birth is required
                             </span>
                         </div>
 
                         <div class="form-group">
-                            <label for="coverFor">Cover For *</label>
+                            <label for="coverFor" class="form-label">Cover For *</label>
                             <p-select
                                 id="coverFor"
                                 [options]="coverOptions"
@@ -97,9 +113,10 @@
                                 optionLabel="label"
                                 optionValue="value"
                                 placeholder="Select coverage"
-                                class="form-select">
+                                class="form-select"
+                                [class.select-error]="coverForControl.touched && coverForControl.invalid">
                             </p-select>
-                            <span class="error-text" *ngIf="controls['coverFor'].touched && controls['coverFor'].invalid">
+                            <span class="error-text" *ngIf="coverForControl.touched && coverForControl.invalid">
                                 Please select coverage type
                             </span>
                         </div>
@@ -108,20 +125,23 @@
                     <!-- Row 3: Pincode & Sum Insured -->
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="pincode">Pincode *</label>
+                            <label for="pincode" class="form-label">Pincode *</label>
                             <input
                                 id="pincode"
                                 type="text"
                                 formControlName="pincode"
                                 placeholder="6-digit pincode"
-                                class="form-input">
-                            <span class="error-text" *ngIf="controls['pincode'].touched && controls['pincode'].invalid">
+                                maxlength="6"
+                                class="form-input"
+                                (input)="onlyDigits($event)"
+                                [class.input-error]="pincodeControl.touched && pincodeControl.invalid">
+                            <span class="error-text" *ngIf="pincodeControl.touched && pincodeControl.invalid">
                                 Enter valid 6-digit pincode
                             </span>
                         </div>
 
                         <div class="form-group">
-                            <label for="sumInsured">Sum Insured *</label>
+                            <label for="sumInsured" class="form-label">Sum Insured *</label>
                             <p-select
                                 id="sumInsured"
                                 [options]="sumInsuredOptions"
@@ -129,28 +149,51 @@
                                 optionLabel="label"
                                 optionValue="value"
                                 placeholder="Select amount"
-                                class="form-select">
+                                class="form-select"
+                                [class.select-error]="sumInsuredControl.touched && sumInsuredControl.invalid">
                             </p-select>
-                            <span class="error-text" *ngIf="controls['sumInsured'].touched && controls['sumInsured'].invalid">
+                            <span class="error-text" *ngIf="sumInsuredControl.touched && sumInsuredControl.invalid">
                                 Please select sum insured
                             </span>
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <button type="submit" class="submit-btn">
-                        Compare Plans & Get Quotes
-                        <span class="arrow">→</span>
-                    </button>
+                    <!-- Submit Button with dynamic styling -->
+                    <div class="button-container">
+                        <button 
+                            type="submit" 
+                            class="submit-btn"
+                            [disabled]="quoteForm.invalid && isSubmitted">
+                            <span class="button-text">Compare Plans & Get Quotes</span>
+                            <span class="arrow" *ngIf="!isSubmitted">→</span>
+                            <span class="loader" *ngIf="isSubmitted">⟳</span>
+                        </button>
+                    </div>
 
                 </form>
 
+                <!-- Form Footer -->
                 <div class="form-footer">
-                    <p>✓ 100% Secure & Confidential</p>
-                    <p>✓ Free Comparison</p>
+                    <div class="footer-item" *ngIf="!showSuccessMessage">
+                        <span class="footer-icon">✓</span>
+                        <span>100% Secure & Confidential</span>
+                    </div>
+                    <div class="footer-item" *ngIf="!showSuccessMessage">
+                        <span class="footer-icon">✓</span>
+                        <span>Free Comparison</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Login Modal Component -->
+    <app-login-modal
+        [isVisible]="showLoginModal()"
+        (closeModal)="closeLoginModal()"
+        (otpLogin)="handleOTPLogin($event)"
+        (whatsappLogin)="handleWhatsAppLogin($event)"
+        (googleLogin)="handleGoogleLogin()">
+    </app-login-modal>
 
 </div>

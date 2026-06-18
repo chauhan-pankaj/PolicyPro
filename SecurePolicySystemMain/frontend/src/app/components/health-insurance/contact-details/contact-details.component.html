@@ -1,0 +1,89 @@
+<div class="contact-details">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h2 class="page-title">Almost Done!</h2>
+    <p class="page-subtitle">Complete your details to get personalized quotes</p>
+  </div>
+
+  <!-- Form -->
+  <form class="contact-form">
+    <!-- Full Name -->
+    <div class="form-group">
+      <label class="form-label">Full Name *</label>
+      <input
+        type="text"
+        [(ngModel)]="fullName"
+        (blur)="markTouched('fullName')"
+        name="fullName"
+        placeholder="Enter your full name"
+        class="form-input"
+        [class.input-error]="touched().fullName && !isFieldValid('fullName')">
+      <span class="error-text" *ngIf="touched().fullName && !isFieldValid('fullName')">
+        Full name must be at least 3 characters
+      </span>
+    </div>
+
+    <!-- Mobile Number -->
+    <div class="form-group">
+      <label class="form-label">Mobile Number *</label>
+      <input
+        type="text"
+        [(ngModel)]="mobileNumber"
+        (blur)="markTouched('mobile')"
+        (input)="onlyDigits($event, 'mobile')"
+        maxlength="10"
+        name="mobile"
+        placeholder="10-digit mobile number"
+        class="form-input"
+        [class.input-error]="touched().mobile && !isFieldValid('mobile')">
+      <span class="error-text" *ngIf="touched().mobile && !isFieldValid('mobile')">
+        Enter valid 10-digit mobile number
+      </span>
+    </div>
+
+    <!-- Pincode -->
+    <div class="form-group">
+      <label class="form-label">Pincode *</label>
+      <input
+        type="text"
+        [(ngModel)]="pincode"
+        (blur)="markTouched('pincode')"
+        (input)="onlyDigits($event, 'pincode')"
+        maxlength="6"
+        name="pincode"
+        placeholder="6-digit pincode"
+        class="form-input"
+        [class.input-error]="touched().pincode && !isFieldValid('pincode')">
+      <span class="error-text" *ngIf="touched().pincode && !isFieldValid('pincode')">
+        Enter valid 6-digit pincode
+      </span>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-label">Email *</label>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        (blur)="markTouched('email')"
+        name="email"
+        placeholder="your@email.com"
+        class="form-input"
+        [class.input-error]="touched().email && !isFieldValid('email')">
+      <span class="error-text" *ngIf="touched().email && !isFieldValid('email')">
+        Enter valid email address
+      </span>
+    </div>
+  </form>
+
+  <!-- Continue Button -->
+  <div class="action-buttons">
+    <button
+      class="btn-continue"
+      (click)="continue()"
+      [disabled]="!canContinue()"
+      type="button">
+      Continue →
+    </button>
+  </div>
+</div>

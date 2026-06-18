@@ -77,18 +77,21 @@ $desktop: 1024px;
       &:hover {
         color: $primary-color;
       }
+    }
 
-      &.login-btn {
-        padding: 0.5rem 1.25rem;
-        background: $primary-color;
+    .login-btn {
+      padding: 0.5rem 1.25rem;
+      background: $primary-color;
+      color: white;
+      border-radius: 4px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
         color: white;
-        border-radius: 4px;
-        font-weight: 600;
-
-        &:hover {
-          color: white;
-          background: darken($primary-color, 5%);
-        }
+        background: mix(#000, $primary-color, 5%);
       }
     }
   }
@@ -96,7 +99,7 @@ $desktop: 1024px;
 
 // ===== Hero Section =====
 .quote-hero {
-  background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 8%) 100%);
+  background: linear-gradient(135deg, $primary-color 0%, mix(#000, $primary-color, 8%) 100%);
   color: white;
   padding: 3rem 2rem;
 
@@ -214,13 +217,23 @@ $desktop: 1024px;
   gap: 1.5rem;
 
   .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
 
     @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+      flex-direction: column;
       gap: 1.25rem;
+    }
+  }
+
+  .form-row > .form-group {
+    flex: 1 1 calc(50% - 0.75rem);
+    min-width: 250px;
+
+    @media (max-width: 768px) {
+      flex: 1 1 100%;
+      min-width: auto;
     }
   }
 
@@ -229,15 +242,14 @@ $desktop: 1024px;
     flex-direction: column;
     gap: 0.5rem;
 
-    label {
+    .form-label {
       font-size: 0.95rem;
       font-weight: 600;
       color: $text-dark;
       display: block;
     }
 
-    .form-input,
-    .form-select {
+    .form-input {
       padding: 0.875rem 1rem;
       border: 1.5px solid $border-color;
       border-radius: 6px;
@@ -245,6 +257,7 @@ $desktop: 1024px;
       font-family: inherit;
       transition: all 0.3s ease;
       background: $bg-lighter;
+      color: $text-dark;
 
       &:focus {
         outline: none;
@@ -255,10 +268,21 @@ $desktop: 1024px;
       &::placeholder {
         color: $text-light;
       }
+
+      // Error state styling
+      &.input-error {
+        border-color: $danger-color;
+        background-color: rgba($danger-color, 0.03);
+
+        &:focus {
+          border-color: $danger-color;
+          box-shadow: 0 0 0 3px rgba($danger-color, 0.1);
+        }
+      }
     }
 
     .form-select {
-      padding: 0;
+      padding: 0 !important;
     }
 
     .error-text {
@@ -266,7 +290,14 @@ $desktop: 1024px;
       color: $danger-color;
       font-weight: 500;
       margin-top: -0.25rem;
+      display: block;
     }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
   }
 
   .submit-btn {
@@ -279,31 +310,101 @@ $desktop: 1024px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    min-width: 250px;
 
-    &:hover {
-      background: darken($primary-color, 5%);
+    &:hover:not(:disabled) {
+      background: mix(#000, $primary-color, 5%);
       box-shadow: $shadow-md;
       transform: translateY(-2px);
     }
 
-    &:active {
+    &:active:not(:disabled) {
       transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .button-text {
+      font-weight: 600;
     }
 
     .arrow {
       font-size: 1.2rem;
+      animation: slideArrow 0.6s infinite;
+    }
+
+    .loader {
+      font-size: 1rem;
+      animation: spin 1s linear infinite;
     }
   }
 }
 
+// ===== Animation Keyframes =====
+@keyframes slideArrow {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ===== Success Message =====
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba($success-color, 0.1);
+  border: 1.5px solid $success-color;
+  border-radius: 8px;
+  color: $success-color;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  animation: slideInDown 0.3s ease;
+
+  .success-icon {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===== Form Footer =====
 .form-footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
@@ -315,15 +416,18 @@ $desktop: 1024px;
     text-align: center;
   }
 
-  p {
+  .footer-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 0.9rem;
     color: $text-muted;
-    margin: 0;
     font-weight: 500;
 
-    &::before {
-      content: '';
-      margin-right: 0.5rem;
+    .footer-icon {
+      color: $success-color;
+      font-weight: 700;
+      font-size: 1rem;
     }
   }
 }
@@ -340,7 +444,7 @@ $desktop: 1024px;
     transition: all 0.3s ease;
 
     &:not(.p-disabled):hover {
-      border-color: darken($border-color, 8%);
+      border-color: mix(#000, $border-color, 8%);
     }
 
     &.p-focus {
@@ -350,11 +454,13 @@ $desktop: 1024px;
 
     .p-select-label {
       padding: 0.875rem 1rem;
-      color: $text-dark;
+      color: $text-dark !important;
       font-size: 1rem;
+      font-weight: 500;
 
       &.p-placeholder {
-        color: $text-light;
+        color: $text-light !important;
+        font-weight: 400;
       }
     }
 
@@ -380,22 +486,25 @@ $desktop: 1024px;
 
   .p-select-option {
     padding: 0.75rem 1rem;
-    color: $text-dark;
+    color: $text-dark !important;
     font-size: 0.95rem;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    background: $bg-lighter;
 
     &:hover {
-      background-color: rgba($primary-color, 0.05);
+      background-color: #e3f2fd !important;
+      color: $text-dark !important;
     }
 
     &.p-select-option-selected {
-      background-color: rgba($primary-color, 0.1);
-      color: $primary-color;
+      background-color: #bbdefb !important;
+      color: $text-dark !important;
       font-weight: 600;
     }
 
     &.p-focus {
-      background-color: rgba($primary-color, 0.08);
+      background-color: #e8f4f8 !important;
+      color: $text-dark !important;
     }
   }
 

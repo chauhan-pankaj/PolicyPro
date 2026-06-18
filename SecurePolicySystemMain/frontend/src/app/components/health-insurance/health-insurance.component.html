@@ -1,0 +1,79 @@
+<div class="health-insurance-container">
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-content">
+      <div class="brand" (click)="goHome()" style="cursor: pointer;">
+        <h1 class="brand-name">🛡️ SureCover</h1>
+        <p class="brand-tagline">HAR FAMILY HOGI INSURED</p>
+      </div>
+      <div class="nav-actions">
+        <select class="language-selector" [value]="selectedLanguage()" (change)="changeLanguage($any($event.target).value)">
+          <option *ngFor="let lang of languages" [value]="lang.code">{{ lang.label }}</option>
+        </select>
+        <button class="help-btn" type="button">📞 Help</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Promotional Banner -->
+  <div class="promo-banner">
+    <span>💰 {{ translate('get_0_gst') }}**</span>
+  </div>
+
+  <!-- Step Indicator -->
+  <header class="health-header">
+    <div class="steps-indicator">
+      <div class="step" [class.active]="currentStep$() === 1">
+        <span class="step-number">1</span>
+        <span class="step-label">Members</span>
+      </div>
+      <div class="step-connector" [class.active]="currentStep$() > 1"></div>
+      <div class="step" [class.active]="currentStep$() === 2">
+        <span class="step-number">2</span>
+        <span class="step-label">Ages</span>
+      </div>
+      <div class="step-connector" [class.active]="currentStep$() > 2"></div>
+      <div class="step" [class.active]="currentStep$() === 3">
+        <span class="step-number">3</span>
+        <span class="step-label">Details</span>
+      </div>
+      <div class="step-connector" [class.active]="currentStep$() > 3"></div>
+      <div class="step" [class.active]="currentStep$() === 4">
+        <span class="step-number">4</span>
+        <span class="step-label">Quotes</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-wrapper">
+      <!-- Step 1: Member Selection -->
+      <div *ngIf="currentStep$() === 1" class="step-content">
+        <app-member-selection></app-member-selection>
+      </div>
+
+      <!-- Step 2: Member Ages -->
+      <div *ngIf="currentStep$() === 2" class="step-content">
+        <app-member-age></app-member-age>
+      </div>
+
+      <!-- Step 3: Contact Details -->
+      <div *ngIf="currentStep$() === 3" class="step-content">
+        <app-contact-details></app-contact-details>
+      </div>
+
+      <!-- Step 4: Quote Results -->
+      <div *ngIf="currentStep$() === 4" class="step-content">
+        <app-quote-results></app-quote-results>
+      </div>
+    </div>
+
+    <!-- Back Navigation (for mobile) -->
+    <div class="back-nav" *ngIf="currentStep$() > 1">
+      <button class="back-btn" (click)="handleBackClick()" type="button">
+        ← Back
+      </button>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,103 @@
+<div class="login-modal-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="login-modal-container" (click)="$event.stopPropagation()">
+    <!-- Close Button -->
+    <button class="close-btn" (click)="onClose()" type="button" aria-label="Close modal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h1 class="modal-title">Sign-in to SureCover</h1>
+        <p class="modal-subtitle">
+          For a more personalised experience, sign in with your registered mobile number
+        </p>
+      </div>
+
+      <!-- Form Section -->
+      <form [formGroup]="loginForm" class="login-form">
+        <!-- Mobile Number Input -->
+        <div class="mobile-input-wrapper">
+          <div class="country-section">
+            <div class="flag-container">
+              <img 
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect fill='%23FF9933' width='900' height='600'/%3E%3Crect fill='FFF' y='200' width='900' height='200'/%3E%3Crect fill='%23138808' y='400' width='900' height='200'/%3E%3C/svg%3E"
+                alt="India Flag"
+                class="flag-icon">
+            </div>
+            <span class="country-code">+91</span>
+          </div>
+
+          <input
+            type="text"
+            formControlName="mobileNumber"
+            placeholder="Mobile Number"
+            class="mobile-input"
+            maxlength="10"
+            (input)="onlyDigits($event)"
+            [class.input-error]="showValidation() && mobileNumberControl.invalid">
+        </div>
+
+        <!-- Validation Message -->
+        <div class="validation-message" *ngIf="showValidation() && mobileNumberControl.invalid">
+          <span *ngIf="mobileNumberControl.hasError('required')">
+            Mobile number is required
+          </span>
+          <span *ngIf="mobileNumberControl.hasError('pattern')">
+            Enter a valid 10-digit mobile number (starting with 6-9)
+          </span>
+        </div>
+
+        <!-- OTP Button -->
+        <button 
+          type="button" 
+          class="btn btn-otp"
+          (click)="onSignInWithOTP()"
+          [disabled]="isLoading()">
+          <span *ngIf="!isLoading()">Sign in with OTP</span>
+          <span *ngIf="isLoading()" class="loader">⟳</span>
+        </button>
+
+        <!-- Divider -->
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <!-- WhatsApp Button -->
+        <button 
+          type="button" 
+          class="btn btn-whatsapp"
+          (click)="onSignInWithWhatsApp()">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.967 1.523c-2.82 1.956-4.647 5.409-4.647 9.106 0 1.432.191 2.814.571 4.123L2 22l4.248-.678c1.25.722 2.672 1.108 4.15 1.108h.004c5.427 0 9.852-4.422 9.852-9.85 0-2.629-.975-5.102-2.745-6.978-1.77-1.877-4.126-2.905-6.514-2.905"/>
+          </svg>
+          Sign in with WhatsApp
+        </button>
+
+        <!-- Google Button -->
+        <button 
+          type="button" 
+          class="btn btn-google">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Sign in with Google
+        </button>
+      </form>
+
+      <!-- Footer Text -->
+      <p class="modal-footer-text">
+        By continuing, you agree to our 
+        <a href="#" class="link">Terms of Use</a> and 
+        <a href="#" class="link">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>

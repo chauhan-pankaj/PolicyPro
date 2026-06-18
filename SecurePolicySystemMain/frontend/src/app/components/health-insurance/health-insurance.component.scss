@@ -1,0 +1,330 @@
+// ===== Color Variables =====
+$primary-blue: #0f3dde;
+$dark-blue: #082b8a;
+$light-gray: #f5f7fb;
+$text-dark: #1e293b;
+$text-muted: #64748b;
+$border-color: #e2e8f0;
+$white: #ffffff;
+$green: #16a34a;
+$orange: #f97316;
+
+// ===== Container =====
+.health-insurance-container {
+  min-height: 100vh;
+  background: $light-gray;
+}
+
+// ===== Top Navigation =====
+.top-nav {
+  background: $white;
+  border-bottom: 1px solid $border-color;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $primary-blue;
+    margin: 0;
+  }
+
+  .brand-tagline {
+    font-size: 0.75rem;
+    color: $text-muted;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.language-selector {
+  padding: 0.5rem 1rem;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background: $white;
+  cursor: pointer;
+  color: $text-dark;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary-blue;
+    box-shadow: 0 2px 4px rgba($primary-blue, 0.1);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary-blue;
+    box-shadow: 0 2px 8px rgba($primary-blue, 0.2);
+  }
+}
+
+.help-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid $border-color;
+  background: $white;
+  color: $primary-blue;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary-blue;
+    background: #f0f4ff;
+  }
+}
+
+// ===== Promotional Banner =====
+.promo-banner {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: $white;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+// ===== Header =====
+.health-header {
+  background: $white;
+  border-bottom: 2px solid $border-color;
+  padding: 2rem;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $text-dark;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.steps-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: $light-gray;
+  transition: all 0.3s ease;
+
+  &.active {
+    background: $green;
+    color: $white;
+  }
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: $border-color;
+  color: $text-dark;
+
+  .step.active & {
+    background: $white;
+    color: $green;
+  }
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.step-connector {
+  width: 30px;
+  height: 2px;
+  background: $border-color;
+  transition: background 0.3s ease;
+
+  &.active {
+    background: $green;
+  }
+}
+
+// ===== Main Content =====
+.main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.content-wrapper {
+  background: $white;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-height: 500px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-content {
+  animation: fadeIn 0.3s ease;
+}
+
+// ===== Back Navigation =====
+.back-nav {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.back-btn {
+  padding: 0.75rem 1.5rem;
+  background: $light-gray;
+  color: $text-dark;
+  border: 2px solid $border-color;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary-blue;
+    color: $primary-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ===== Responsive Design =====
+@media (max-width: 768px) {
+  .health-header {
+    padding: 1.5rem;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .steps-indicator {
+    gap: 0;
+  }
+
+  .step {
+    padding: 0.75rem;
+    min-width: auto;
+  }
+
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 0.95rem;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+  }
+
+  .step-connector {
+    width: 20px;
+  }
+
+  .main-content {
+    padding: 2rem 1rem;
+  }
+
+  .content-wrapper {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .health-header {
+    padding: 1rem;
+  }
+
+  .header-title {
+    font-size: 1.25rem;
+  }
+
+  .step {
+    padding: 0.5rem;
+    gap: 0.25rem;
+  }
+
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+
+  .step-label {
+    display: none;
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .content-wrapper {
+    padding: 1.5rem;
+    min-height: auto;
+  }
+}
