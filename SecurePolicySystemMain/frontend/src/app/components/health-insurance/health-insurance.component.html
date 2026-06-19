@@ -11,9 +11,19 @@
           <option *ngFor="let lang of languages" [value]="lang.code">{{ lang.label }}</option>
         </select>
         <button class="help-btn" type="button">📞 Help</button>
+        <button class="login-nav-btn" type="button" (click)="openLoginModal()">Login</button>
       </div>
     </div>
   </header>
+
+  <!-- Login Modal -->
+  <app-login-modal
+    [isVisible]="showLoginModal()"
+    (closeModal)="closeLoginModal()"
+    (otpLogin)="handleOTPLogin($event)"
+    (whatsappLogin)="handleWhatsAppLogin($event)"
+    (googleLogin)="handleGoogleLogin()">
+  </app-login-modal>
 
   <!-- Promotional Banner -->
   <div class="promo-banner">

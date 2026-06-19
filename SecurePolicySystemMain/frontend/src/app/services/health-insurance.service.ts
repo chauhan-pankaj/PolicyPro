@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { signal } from '@angular/core';
+import { QuoteResponse } from './quote.service';
 
 export interface SelectedMember {
   type: 'self' | 'spouse' | 'son' | 'daughter' | 'father' | 'mother';
@@ -38,6 +39,23 @@ export class HealthInsuranceService {
   });
 
   currentStep = signal<1 | 2 | 3 | 4>(1);
+
+  // Quote API response state
+  quoteResponse = signal<QuoteResponse | null>(null);
+  isLoadingQuotes = signal<boolean>(false);
+  quoteError = signal<string | null>(null);
+
+  setQuoteResponse(response: QuoteResponse): void {
+    this.quoteResponse.set(response);
+  }
+
+  setQuoteError(error: string | null): void {
+    this.quoteError.set(error);
+  }
+
+  setLoadingQuotes(loading: boolean): void {
+    this.isLoadingQuotes.set(loading);
+  }
 
   // Member selection methods
   setGender(gender: 'male' | 'female'): void {

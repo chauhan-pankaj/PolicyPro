@@ -152,4 +152,13 @@
     </div>
   </section>
 
+  <!-- Login Modal -->
+  <app-login-modal
+    [isVisible]="showLoginModal()"
+    (closeModal)="closeLoginModal()"
+    (otpLogin)="handleOTPLogin($event)"
+    (whatsappLogin)="handleWhatsAppLogin($event)"
+    (googleLogin)="handleGoogleLogin()">
+  </app-login-modal>
+
 </div>

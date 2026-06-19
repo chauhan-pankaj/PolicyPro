@@ -7,6 +7,7 @@ import { MemberSelectionComponent } from './member-selection/member-selection.co
 import { MemberAgeComponent } from './member-age/member-age.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { QuoteResultsComponent } from './quote-results/quote-results.component';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'app-health-insurance',
@@ -16,13 +17,16 @@ import { QuoteResultsComponent } from './quote-results/quote-results.component';
     MemberSelectionComponent,
     MemberAgeComponent,
     ContactDetailsComponent,
-    QuoteResultsComponent
+    QuoteResultsComponent,
+    LoginModalComponent
   ],
   templateUrl: './health-insurance.component.html',
   styleUrls: ['./health-insurance.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HealthInsuranceComponent {
+  showLoginModal = signal(false);
+
   get languages() {
     return this.translationService.languages;
   }
@@ -62,5 +66,28 @@ export class HealthInsuranceComponent {
     } else {
       this.healthService.previousStep();
     }
+  }
+
+  openLoginModal(): void {
+    this.showLoginModal.set(true);
+  }
+
+  closeLoginModal(): void {
+    this.showLoginModal.set(false);
+  }
+
+  handleOTPLogin(mobile: string): void {
+    console.log('OTP Login:', mobile);
+    this.closeLoginModal();
+  }
+
+  handleWhatsAppLogin(mobile: string): void {
+    console.log('WhatsApp Login:', mobile);
+    this.closeLoginModal();
+  }
+
+  handleGoogleLogin(): void {
+    console.log('Google Login initiated');
+    this.closeLoginModal();
   }
 }

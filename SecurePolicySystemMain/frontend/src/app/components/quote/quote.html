@@ -48,9 +48,14 @@
                     <span class="success-icon">✓</span>
                     <span>Quote request submitted successfully!</span>
                 </div>
-
+                <!-- Error Message -->
+                <div class="error-message" *ngIf="errorMessage()">
+                    <span class="error-icon">✕</span>
+                    <span>{{ errorMessage() }}</span>
+                    <button type="button" class="close-error" (click)="clearError()">✕</button>
+                </div>
                 <!-- Form -->
-                <form [formGroup]="quoteForm" (ngSubmit)="getQuote()" class="quote-form" *ngIf="!showSuccessMessage">
+                <form [formGroup]="quoteForm" (ngSubmit)="getQuote()" class="quote-form" *ngIf="!showSuccessMessage()">
                     
                     <!-- Row 1: Full Name & Mobile -->
                     <div class="form-row">
@@ -163,10 +168,10 @@
                         <button 
                             type="submit" 
                             class="submit-btn"
-                            [disabled]="quoteForm.invalid && isSubmitted">
+                            [disabled]="quoteForm.invalid || isLoading()">
                             <span class="button-text">Compare Plans & Get Quotes</span>
-                            <span class="arrow" *ngIf="!isSubmitted">→</span>
-                            <span class="loader" *ngIf="isSubmitted">⟳</span>
+                            <span class="arrow" *ngIf="!isLoading()">→</span>
+                            <span class="loader" *ngIf="isLoading()">⟳</span>
                         </button>
                     </div>
 
@@ -174,11 +179,11 @@
 
                 <!-- Form Footer -->
                 <div class="form-footer">
-                    <div class="footer-item" *ngIf="!showSuccessMessage">
+                    <div class="footer-item" *ngIf="!showSuccessMessage()">
                         <span class="footer-icon">✓</span>
                         <span>100% Secure & Confidential</span>
                     </div>
-                    <div class="footer-item" *ngIf="!showSuccessMessage">
+                    <div class="footer-item" *ngIf="!showSuccessMessage()">
                         <span class="footer-icon">✓</span>
                         <span>Free Comparison</span>
                     </div>
