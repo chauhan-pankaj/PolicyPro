@@ -1,7 +1,9 @@
 <div class="member-selection">
   <!-- Page Heading -->
   <div class="page-header">
-    <h2 class="page-title">{{ translate('get_0_gst') }}</h2>
+    <p class="eyebrow">HEALTH COVER, MADE SIMPLE</p>
+    <h2 class="page-title">Who would you like to protect?</h2>
+    <p class="page-subtitle">Choose the people you want to include. You can tailor the details next.</p>
   </div>
 
   <!-- Gender Toggle -->
@@ -28,17 +30,36 @@
   <div class="members-section">
     <p class="section-label">{{ translate('select_members') }}</p>
     <div class="members-grid">
-      <button
+      <div
         *ngFor="let member of members"
         class="member-card"
         [class.selected]="isMemberSelected(member.type)"
         (click)="toggleMember(member)"
-        type="button">
+        (keydown.enter)="toggleMember(member)"
+        (keydown.space)="$event.preventDefault(); toggleMember(member)"
+        role="button"
+        tabindex="0">
         <div class="card-checkbox" *ngIf="isMemberSelected(member.type)">
           <span class="checkbox-icon">✓</span>
         </div>
         <span class="member-label">{{ member.label }}</span>
-      </button>
+        <div
+          *ngIf="isMemberSelected(member.type) && (member.type === 'son' || member.type === 'daughter')"
+          class="quantity-inline"
+          (click)="$event.stopPropagation()">
+          <button
+            class="qty-btn"
+            (click)="member.type === 'son' ? updateSonQuantity(-1) : updateDaughterQuantity(-1)"
+            [disabled]="member.type === 'son' ? getSonQuantity() === 1 : getDaughterQuantity() === 1"
+            type="button">−</button>
+          <span class="qty-value">{{ member.type === 'son' ? getSonQuantity() : getDaughterQuantity() }}</span>
+          <button
+            class="qty-btn"
+            (click)="member.type === 'son' ? updateSonQuantity(1) : updateDaughterQuantity(1)"
+            [disabled]="member.type === 'son' ? getSonQuantity() === 4 : getDaughterQuantity() === 4"
+            type="button">+</button>
+        </div>
+      </div>
     </div>
 
     <!-- More Members Link -->
@@ -46,47 +67,6 @@
       <a href="javascript:void(0)" class="more-members-link">● {{ translate('more_members') }} ▼</a>
     </div>
 
-    <!-- Son Quantity Selector -->
-    <div *ngIf="isMemberSelected('son')" class="quantity-selector">
-      <div class="quantity-controls">
-        <button
-          class="qty-btn"
-          (click)="updateSonQuantity(-1)"
-          [disabled]="getSonQuantity() === 1"
-          type="button">
-          −
-        </button>
-        <input type="number" [value]="getSonQuantity()" readonly class="qty-input">
-        <button
-          class="qty-btn"
-          (click)="updateSonQuantity(1)"
-          [disabled]="getSonQuantity() === 4"
-          type="button">
-          +
-        </button>
-      </div>
-    </div>
-
-    <!-- Daughter Quantity Selector -->
-    <div *ngIf="isMemberSelected('daughter')" class="quantity-selector">
-      <div class="quantity-controls">
-        <button
-          class="qty-btn"
-          (click)="updateDaughterQuantity(-1)"
-          [disabled]="getDaughterQuantity() === 1"
-          type="button">
-          −
-        </button>
-        <input type="number" [value]="getDaughterQuantity()" readonly class="qty-input">
-        <button
-          class="qty-btn"
-          (click)="updateDaughterQuantity(1)"
-          [disabled]="getDaughterQuantity() === 4"
-          type="button">
-          +
-        </button>
-      </div>
-    </div>
   </div>
 
   <!-- Continue Button -->

@@ -15,10 +15,11 @@ $border-light: #e2e8f0;
 
 // ===== App Download Section =====
 .app-download-section {
-  background: linear-gradient(to bottom, #f8f9fb 0%, #f5f7fb 100%);
+  background: #e6eee5;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: $text-dark;
-  padding: 4rem 2rem;
-  margin-top: 3rem;
+  padding: 4.4rem 2rem 3.8rem;
+  margin-top: 0;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -33,12 +34,12 @@ $border-light: #e2e8f0;
 }
 
 .app-download-container {
-  max-width: 1600px;
+  max-width: 1720px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1.5fr;
-  gap: 2.5rem;
-  align-items: flex-start;
+  grid-template-columns: minmax(370px, 1.25fr) minmax(270px, .8fr) minmax(405px, 1.1fr);
+  gap: 2.4rem;
+  align-items: center;
 
   @media (max-width: 1200px) {
     grid-template-columns: 1fr 1fr 1.2fr;
@@ -63,9 +64,10 @@ $border-light: #e2e8f0;
 }
 
 .app-title {
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: $dark-blue;
+  font-size: clamp(2.1rem, 3vw, 3.15rem);
+  font-weight: 760;
+  color: #173c3b;
+  letter-spacing: -2.4px;
   margin-bottom: 0.3rem;
   position: relative;
   display: inline-block;
@@ -75,9 +77,9 @@ $border-light: #e2e8f0;
     position: absolute;
     bottom: -15px;
     left: 0;
-    width: 100px;
-    height: 5px;
-    background: $primary-blue;
+    width: 90px;
+    height: 4px;
+    background: #e3644b;
     border-radius: 3px;
   }
 
@@ -91,9 +93,9 @@ $border-light: #e2e8f0;
 }
 
 .app-subtitle {
-  font-size: 1.1rem;
-  color: $text-light;
-  margin: 2.5rem 0 1.5rem 0;
+  font-size: 1.12rem;
+  color: #4d6867;
+  margin: 2.4rem 0 2.35rem 0;
   line-height: 1.6;
 
   @media (max-width: 480px) {
@@ -104,26 +106,26 @@ $border-light: #e2e8f0;
 .features-list {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0 2rem 0;
+  margin: 0 0 2.9rem;
 
   .feature-item {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-    font-size: 0.95rem;
-    color: $text-dark;
+    gap: .95rem;
+    margin-bottom: 1.35rem;
+    font-size: 1rem;
+    color: #244847;
     line-height: 1.5;
 
     .feature-icon {
-      font-size: 1rem;
-      color: $primary-blue;
+      font-size: 1.45rem;
+      color: #e3644b;
       flex-shrink: 0;
       margin-top: 3px;
     }
 
     .feature-text {
-      color: #495057;
+      color: #244847;
       font-weight: 500;
     }
 
@@ -136,10 +138,10 @@ $border-light: #e2e8f0;
 }
 
 .download-label {
-  font-size: 0.95rem;
-  color: $text-dark;
-  margin: 2rem 0 1rem 0;
-  font-weight: 600;
+  font-size: 1rem;
+  color: #496462;
+  margin: 0 0 1.25rem;
+  font-weight: 500;
 }
 
 .app-store-buttons {
@@ -157,11 +159,12 @@ $border-light: #e2e8f0;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.7rem 1.5rem;
-  background: #000;
+  min-width: 180px;
+  padding: .68rem 1.2rem;
+  background: #173c3b;
   color: $white;
   border: none;
-  border-radius: 8px;
+  border-radius: 9px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: inherit;
@@ -214,12 +217,12 @@ $border-light: #e2e8f0;
 
 // ===== Service Cards =====
 .app-services {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 14px;
   margin-top: 0;
   width: 100%;
-  max-width: 320px;
+  max-width: 310px;
   margin: 0 auto;
 
   @media (max-width: 1024px) {
@@ -230,7 +233,7 @@ $border-light: #e2e8f0;
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(115px, 1fr));
     gap: 1rem;
     max-width: 100%;
   }
@@ -242,13 +245,14 @@ $border-light: #e2e8f0;
 }
 
 .service-card {
-  background: $white;
-  padding: 1.75rem 1.25rem;
-  border-radius: 10px;
+  background: rgba(255, 253, 248, .88);
+  padding: 1.25rem .9rem;
+  border-radius: 15px;
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  min-height: 160px;
+  min-height: 142px;
+  border: 1px solid rgba(23, 76, 73, .08);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -260,30 +264,30 @@ $border-light: #e2e8f0;
   }
 
   .service-icon {
-    font-size: 3rem;
-    margin-bottom: 0.85rem;
+    font-size: 2.25rem;
+    margin-bottom: .6rem;
     line-height: 1;
     display: block;
 
     &.claim {
-      font-size: 2.8rem;
+      font-size: 2rem;
     }
 
     &.tax {
-      font-size: 2.6rem;
+      font-size: 2rem;
     }
 
     &.umbrella {
-      font-size: 2.8rem;
+      font-size: 2rem;
     }
 
     &.health {
-      font-size: 2.6rem;
+      font-size: 2rem;
     }
   }
 
   .service-title {
-    font-size: 0.95rem;
+    font-size: .86rem;
     font-weight: 600;
     color: $text-dark;
     line-height: 1.4;
@@ -314,12 +318,23 @@ $border-light: #e2e8f0;
   }
 }
 
+// A light stagger keeps the feature tiles visually connected to the phone preview.
+.service-card:nth-child(1) { transform: translateY(-12px); }
+.service-card:nth-child(2) { transform: translateY(10px); }
+.service-card:nth-child(3) { transform: translateY(-12px); }
+.service-card:nth-child(4) { transform: translateY(10px); }
+
+.service-card:nth-child(1) .service-icon { color: #0f9272; }
+.service-card:nth-child(2) .service-icon { color: #7864c7; }
+.service-card:nth-child(3) .service-icon { color: #e89054; }
+.service-card:nth-child(4) .service-icon { color: #e75f62; }
+
 // ===== Phone Mockups =====
 .app-preview {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 0;
   position: relative;
   padding-left: 1rem;
 
@@ -338,22 +353,24 @@ $border-light: #e2e8f0;
 
 .phone-mockup {
   position: relative;
-  width: 260px;
-  height: 510px;
+  width: 246px;
+  height: 483px;
   background: #000;
-  border-radius: 35px;
+  border-radius: 39px;
   padding: 12px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   overflow: hidden;
 
   &.primary {
     z-index: 2;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   &.secondary {
     z-index: 1;
-    margin-left: -70px;
+    margin-left: -55px;
+    transform: scale(.9);
+    transform-origin: left center;
 
     @media (max-width: 768px) {
       margin-left: 0;
@@ -440,14 +457,25 @@ $border-light: #e2e8f0;
 
 // Primary Phone Content
 .screen-header {
-  text-align: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  margin-bottom: .85rem;
+  padding: 0 0 .75rem;
+  border-bottom: 1px solid #edf0eb;
 
   .user-avatar {
-    font-size: 1.8rem;
-    margin-bottom: 0.3rem;
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #e3644b;
+    color: #fff;
+    font-weight: 800;
+    font-size: .85rem;
+    margin: 0;
   }
 
   .user-name {
@@ -463,10 +491,10 @@ $border-light: #e2e8f0;
 }
 
 .premium-section {
-  background: $primary-blue;
+  background: #174c49;
   color: $white;
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: 13px;
   margin-bottom: 1rem;
 
   .look-premium {
@@ -523,7 +551,7 @@ $border-light: #e2e8f0;
 .view-plans-btn {
   width: 100%;
   background: $white;
-  color: $primary-blue;
+  color: #174c49;
   border: none;
   padding: 0.6rem;
   border-radius: 6px;
@@ -540,7 +568,7 @@ $border-light: #e2e8f0;
 
 .offers-label {
   font-size: 0.65rem;
-  color: $text-light;
+  color: #617876;
   font-weight: 600;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
@@ -548,18 +576,18 @@ $border-light: #e2e8f0;
 }
 
 .discount-badge {
-  background: #f0f9ff;
-  color: #0284c7;
+  background: #ecf4ed;
+  color: #24605c;
   padding: 0.6rem;
   border-radius: 6px;
   font-size: 0.65rem;
   line-height: 1.3;
-  border-left: 3px solid #0284c7;
+  border-left: 3px solid #e3644b;
 }
 
 // Secondary Phone Content
 .secondary-screen {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  background: linear-gradient(150deg, #e3644b, #d8504b);
   color: $white !important;
   padding: 40px 15px 15px !important;
 
@@ -621,9 +649,9 @@ $border-light: #e2e8f0;
 
 // ===== Our Partners Section =====
 .partners-section {
-  background: $light-gray;
-  padding: 4rem 2rem;
-  border-top: 1px solid #e2e8f0;
+  background: #fffdf8;
+  padding: 5.5rem 2rem 5rem;
+  border-top: 1px solid #e7eee5;
 
   @media (max-width: 768px) {
     padding: 3rem 1.5rem;
@@ -635,16 +663,17 @@ $border-light: #e2e8f0;
 }
 
 .partners-container {
-  max-width: 1400px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
 .partners-title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: $dark-blue;
-  margin-bottom: 0.5rem;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  letter-spacing: -1.8px;
+  font-weight: 760;
+  color: #173c3b;
+  margin-bottom: 0.65rem;
 
   @media (max-width: 768px) {
     font-size: 1.7rem;
@@ -658,9 +687,12 @@ $border-light: #e2e8f0;
 .partners-subtitle {
   text-align: center;
   font-size: 1rem;
-  color: $primary-blue;
-  font-weight: 500;
-  margin-bottom: 2.5rem;
+  color: #d45d44;
+  font-weight: 750;
+  letter-spacing: 1.2px;
+  font-size: .7rem;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
 
   @media (max-width: 768px) {
     font-size: 0.95rem;
@@ -671,8 +703,8 @@ $border-light: #e2e8f0;
 .partners-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1.35rem;
+  margin-top: 0;
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(5, 1fr);
@@ -697,10 +729,13 @@ $border-light: #e2e8f0;
 
 .partner-card {
   text-align: center;
-  transition: all 0.3s ease;
+  position: relative;
+  padding: 1.1rem .6rem .75rem;
+  border-radius: 14px;
+  transition: all .25s ease;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
 
     .partner-logo-box {
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
@@ -709,17 +744,18 @@ $border-light: #e2e8f0;
 }
 
 .partner-logo-box {
-  background: $white;
-  padding: 2rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 0.75rem;
+  background: #eef4ee;
+  padding: 1.2rem .75rem;
+  border-radius: 11px;
+  margin-bottom: .75rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: $primary-blue;
-  letter-spacing: 0.5px;
-  min-height: 80px;
+  box-shadow: none;
+  font-weight: 800;
+  font-size: .82rem;
+  color: #174c49;
+  letter-spacing: .8px;
+  min-height: 68px;
+  border: 1px solid #dceadc;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -734,9 +770,9 @@ $border-light: #e2e8f0;
 
   .partner-text-logo {
     font-weight: 700;
-    font-size: 0.95rem;
-    color: $primary-blue;
-    letter-spacing: 0.5px;
+    font-size: .8rem;
+    color: #174c49;
+    letter-spacing: .7px;
   }
 
   @media (max-width: 768px) {
@@ -753,9 +789,9 @@ $border-light: #e2e8f0;
 }
 
 .partner-name {
-  font-size: 0.85rem;
-  color: $text-dark;
-  font-weight: 500;
+  font-size: .76rem;
+  color: #54706e;
+  font-weight: 650;
   margin: 0;
   line-height: 1.4;
 
@@ -770,14 +806,14 @@ $border-light: #e2e8f0;
 
 // ===== Footer Section =====
 .footer-section {
-  background: linear-gradient(135deg, $darker-blue 0%, #0f172a 100%);
+  background: #173c3b;
   color: $white;
-  padding: 3rem 2rem 1.5rem;
-  border-top: 1px solid rgba($primary-blue, 0.3);
+  padding: 4rem 2rem 1.6rem;
+  border-top: 5px solid #f8c76c;
 }
 
 .footer-content {
-  max-width: 1400px;
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -797,28 +833,30 @@ $border-light: #e2e8f0;
 
 .footer-column {
   h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    color: $white;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+    margin-bottom: 1.35rem;
+    color: #f8c76c;
+    text-transform: uppercase;
   }
 }
 
 .footer-link {
   background: transparent;
   border: none;
-  color: #cbd5e1;
-  padding: 0.4rem 0;
+  color: #d8e5de;
+  padding: 0.48rem 0;
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
   font-family: inherit;
 
   &:hover {
-    color: $primary-blue;
-    padding-left: 0.5rem;
+    color: #f8c76c;
+    padding-left: .35rem;
   }
 
   @media (max-width: 480px) {
@@ -829,11 +867,12 @@ $border-light: #e2e8f0;
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, .17);
 
   p {
-    font-size: 0.9rem;
-    color: #94a3b8;
+    font-size: .8rem;
+    color: #b9cdc2;
+    letter-spacing: .1px;
   }
 }
 
@@ -846,6 +885,8 @@ $border-light: #e2e8f0;
   .footer-section {
     padding: 2rem 1rem 1rem;
   }
+
+  .service-card:nth-child(n) { transform: none; }
 }
 
 @media (max-width: 480px) {

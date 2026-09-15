@@ -27,7 +27,7 @@ export class FooterComponent {
     { name: 'CARE', shortName: 'CARE', fullName: 'Care Health' },
     { name: 'BAJAJ', shortName: 'BAJAJ', fullName: 'Bajaj Allianz' },
     { name: 'TATA', shortName: 'TATA', fullName: 'TATA AIG' },
-    { name: 'ADITYA', shortName: 'ADITYA', fullName: 'Aditya Birla', logo: 'assets/Aditya_Birla@2x.avif' },
+    { name: 'ADITYA', shortName: 'ADITYA', fullName: 'Aditya Birla' },
     { name: 'DIGIT', shortName: 'DIGIT', fullName: 'Digit Insurance' },
     { name: 'MAX', shortName: 'MAX', fullName: 'Max Bupa' },
     { name: 'APOLLO', shortName: 'APOLLO', fullName: 'Apollo Munich' },
@@ -39,6 +39,6 @@ export class FooterComponent {
     { name: 'KOTAK', shortName: 'KOTAK', fullName: 'Kotak Mahindra' },
     { name: 'EDELWEISS', shortName: 'EDELWEISS', fullName: 'Edelweiss' },
     { name: 'PRUDENTIAL', shortName: 'PRUDENTIAL', fullName: 'ICICI Prudential' },
-    { name: 'LIC', shortName: 'LIC', fullName: 'LIC', logo: 'assets/lic-life-insurance-old.avif' }
+    { name: 'LIC', shortName: 'LIC', fullName: 'LIC' }
   ];
 }
