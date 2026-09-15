@@ -1,16 +1,194 @@
 <main class="marketplace-shell">
+
+  <!-- 1. Sticky header -->
   <header class="site-header">
     <a class="brand" routerLink="/" aria-label="SureCover home"><span class="brand-mark">S</span><span>sure<span>cover</span></span></a>
-    <nav class="primary-nav" aria-label="Primary navigation"><a href="#products">Explore cover</a><a href="#how-it-works">How it works</a><a href="#help">Help centre</a></nav>
-    <div class="header-actions"><button class="text-button" type="button" (click)="scrollToSection('help')">Need help?</button><button class="account-button" type="button" (click)="openLoginModal()">My account <span>→</span></button></div>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <button type="button" (click)="scrollToSection('categories')">Insurance</button>
+      <button type="button" (click)="scrollToSection('quick-actions')">Renew</button>
+      <button type="button" (click)="scrollToSection('quick-actions')">Claims</button>
+      <button type="button" (click)="scrollToSection('calculators')">Calculators</button>
+      <button type="button" (click)="scrollToSection('why-choose')">Learn</button>
+      <button type="button" (click)="scrollToSection('support')">Support</button>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" type="button" aria-label="Search" (click)="scrollToSection('categories')">🔍</button>
+      <button class="text-button" type="button" (click)="openLoginModal()">Login</button>
+      <button class="account-button" type="button" (click)="openLoginModal()">My Account <span>→</span></button>
+    </div>
   </header>
+
+  <!-- 2. Hero -->
   <section class="hero">
-    <div class="hero-copy"><p class="eyebrow">INSURANCE, MADE MORE HUMAN</p><h1>Protection that fits<br><em>your life today.</em></h1><p class="hero-intro">Answer a few simple questions and explore cover options built around what matters to you.</p><div class="hero-actions"><button class="primary-button" type="button" (click)="startJourney()">Find my cover <span>→</span></button><button class="quiet-link" type="button" (click)="scrollToSection('how-it-works')">See how it works <span>↓</span></button></div><div class="trust-line"><span class="trust-check">✓</span>No paperwork to start · Clear, side-by-side choices</div></div>
-    <div class="hero-visual" aria-hidden="true"><div class="sun"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="cover-card main-card"><div class="card-top"><span class="mini-mark">S</span><span>YOUR COVER SNAPSHOT</span><i></i></div><div class="shield">✓</div><strong>Looking after<br>what’s yours</strong><div class="coverage-row"><span>Health</span><b>Active</b></div><div class="coverage-row"><span>Family</span><b>Ready to explore</b></div></div><div class="floating-card family-card"><span>♡</span><div><b>Family health</b><small>Flexible cover options</small></div></div><div class="floating-card car-card"><span>⌁</span><div><b>Vehicle cover</b><small>Renew in minutes</small></div></div></div>
+    <div class="hero-copy">
+      <p class="eyebrow">INSURANCE, MADE MORE HUMAN</p>
+      <h1>Let's find you the<br><em>Best Insurance</em></h1>
+      <p class="hero-intro">Compare plans, get expert guidance and secure what matters to you — all in one place.</p>
+      <div class="hero-actions">
+        <button class="primary-button" type="button" (click)="startJourney()">Get Started <span>→</span></button>
+        <button class="quiet-link" type="button" (click)="scrollToSection('why-choose')">See how it works <span>↓</span></button>
+      </div>
+      <div class="trust-line">
+        <span><span class="trust-check">✓</span>Trusted by 5 Crore+ Customers</span>
+        <span><span class="trust-check">♡</span>100% Free &amp; Unbiased Advice</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="sun"></div>
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
+      <div class="cover-card main-card">
+        <div class="card-top"><span class="mini-mark">S</span><span>PROTECT WHAT MATTERS MOST</span><i></i></div>
+        <div class="avatar-trio">
+          <span class="avatar-circle">👨</span>
+          <span class="avatar-circle lead">👩</span>
+          <span class="avatar-circle">🧒</span>
+        </div>
+        <strong>Health · Family<br>Future</strong>
+        <span class="doodle-note">Happy Together, Tomorrow</span>
+        <div class="coverage-row"><span>Health</span><b>Active</b></div>
+        <div class="coverage-row"><span>Family</span><b>Ready to explore</b></div>
+      </div>
+      <div class="floating-card family-card"><span>👨‍👩‍👧</span><div><b>Family health</b><small>Flexible cover options</small></div></div>
+      <div class="floating-card car-card"><span>🚗</span><div><b>Vehicle cover</b><small>Renew in minutes</small></div></div>
+    </div>
   </section>
-  <section class="product-section" id="products"><div class="section-heading"><div><p class="eyebrow">START WITH A NEED</p><h2>What would you like to protect?</h2></div><p>Pick a category to begin a guided, pressure-free comparison.</p></div><div class="product-grid"><button class="product-card" *ngFor="let product of products()" type="button" (click)="selectProduct(product.id)" [class.selected]="selectedProduct() === product.id"><span class="product-icon">{{ product.icon }}</span><span class="product-category">{{ product.label }}</span><strong>{{ product.title }}</strong><span class="product-description">{{ product.description }}</span><span class="product-arrow">Explore <b>→</b></span></button></div></section>
-  <section class="journey-section" id="how-it-works"><div class="journey-copy"><p class="eyebrow">A CALMER WAY TO CHOOSE</p><h2>Confidence at every step.</h2><p>We replace insurance jargon with helpful prompts, clean comparisons and support when you need it.</p><button class="outline-button" type="button" (click)="startJourney()">Start with health cover <span>→</span></button></div><div class="steps"><article><span class="step-number">01</span><h3>Tell us the basics</h3><p>Share who or what you want to cover. It takes less than two minutes.</p></article><article><span class="step-number">02</span><h3>Compare with clarity</h3><p>Review meaningful differences, not an endless wall of fine print.</p></article><article><span class="step-number">03</span><h3>Keep everything together</h3><p>Save policy details and get assistance long after you’ve chosen.</p></article></div></section>
-  <section class="tools-section"><div class="section-heading"><div><p class="eyebrow">MAKE AN INFORMED CALL</p><h2>Useful before you decide.</h2></div><p>Simple planning tools, explained in plain language.</p></div><div class="tool-grid"><article *ngFor="let tool of tools"><span>{{ tool.icon }}</span><h3>{{ tool.title }}</h3><p>{{ tool.description }}</p><button type="button" (click)="startJourney()">Try it <b>→</b></button></article></div></section>
-  <section class="support-section" id="help"><div><p class="eyebrow">HERE WHEN IT COUNTS</p><h2>Questions are always welcome.</h2><p>Need help comparing, renewing, or understanding a claim? Our support team is ready to listen.</p></div><div class="support-actions"><button type="button" (click)="openLoginModal()">Sign in for support <span>→</span></button><button type="button" (click)="scrollToSection('products')">Explore protection <span>↗</span></button></div></section>
+
+  <!-- 3. Insurance category grid -->
+  <section class="category-section" id="categories">
+    <div class="section-heading">
+      <div><p class="eyebrow">START WITH A NEED</p><h2>Explore insurance for every need</h2></div>
+      <p>Pick a category to begin a guided, pressure-free comparison.</p>
+    </div>
+    <div class="category-grid">
+      <button class="category-card" *ngFor="let category of categories" type="button" (click)="selectCategory(category)">
+        <span class="icon-badge" [class]="'tint-' + category.tint">{{ category.icon }}</span>
+        <b>{{ category.title }}</b>
+      </button>
+    </div>
+
+    <!-- 4. Quick action pills -->
+    <div class="quick-actions" id="quick-actions">
+      <button class="pill" type="button" *ngFor="let action of quickActions" (click)="scrollToSection('categories')">{{ action }}</button>
+    </div>
+  </section>
+
+  <!-- 5. Promotional banners -->
+  <section class="promos">
+    <article class="promo" [ngClass]="'promo-' + promo.variant" *ngFor="let promo of promoBanners">
+      <div><span class="icon-badge on-card">{{ promo.icon }}</span><h3>{{ promo.title }}</h3></div>
+      <button class="btn-primary" type="button" (click)="startJourney()">{{ promo.ctaLabel }} <span>→</span></button>
+    </article>
+  </section>
+
+  <!-- 6. Why choose SureCover -->
+  <section class="why-choose" id="why-choose">
+    <div class="why-copy">
+      <p class="eyebrow">WHY CHOOSE SURECOVER</p>
+      <h2>India's trusted platform to buy insurance online</h2>
+      <p class="lead">Simple. Transparent. Always on your side.</p>
+    </div>
+    <div class="benefit-grid">
+      <article class="benefit-card" *ngFor="let benefit of benefits">
+        <span class="icon-badge" [class]="'tint-' + benefit.tint">{{ benefit.icon }}</span>
+        <h3>{{ benefit.title }}</h3>
+        <p>{{ benefit.description }}</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 7. SureCover AI -->
+  <section class="ai-section">
+    <div class="ai-copy">
+      <div class="brand ai-brand"><span class="brand-mark">S</span><span>sure<span>cover ai</span></span></div>
+      <h2>Finding the right insurance just got smarter with SureCover.</h2>
+      <ul class="ai-features">
+        <li *ngFor="let feature of aiFeatures"><span class="check">✓</span>{{ feature }}</li>
+      </ul>
+      <button class="primary-button" type="button" (click)="startJourney()">Try SureCover AI <span>→</span></button>
+    </div>
+    <div class="ai-visual" aria-hidden="true">
+      <div class="ai-chat">
+        <div class="ai-chat-header"><span class="mini-mark">S</span> AI Assistant <i></i></div>
+        <div class="ai-bubble bot">Hi! I'm SureCover AI 👋<br>How can I help you today?</div>
+        <div class="ai-bubble user">Suggest the best health insurance for my family</div>
+        <div class="ai-typing"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Trust strip -->
+  <section class="trust-strip">
+    <div class="trust-item" *ngFor="let item of trustStrip"><span class="icon-badge" [class]="'tint-' + item.tint">{{ item.icon }}</span><b>{{ item.title }}</b></div>
+  </section>
+
+  <!-- 9. Popular calculators -->
+  <section class="calculators" id="calculators">
+    <div class="section-heading">
+      <div><p class="eyebrow">POPULAR CALCULATORS</p><h2>Plan better with our calculators</h2></div>
+      <p>Use our easy-to-use insurance calculators to compare smarter and make informed decisions.</p>
+    </div>
+    <div class="calculator-grid">
+      <article class="calculator-card" *ngFor="let calc of calculators">
+        <span class="icon-badge square" [class]="'tint-' + calc.tint">{{ calc.icon }}</span>
+        <h3>{{ calc.title }}</h3>
+        <ul>
+          <li *ngFor="let link of calc.links">{{ link }}</li>
+        </ul>
+        <button type="button" (click)="openCalculator(calc)">Explore <b>→</b></button>
+      </article>
+    </div>
+    <div class="view-all"><button class="outline-button" type="button" (click)="startJourney()">View All Calculators <span>→</span></button></div>
+  </section>
+
+  <!-- 10. The SureCover Advantage -->
+  <section class="advantage">
+    <div class="section-heading centered">
+      <p class="eyebrow">THE SURECOVER ADVANTAGE</p>
+      <h2>Beyond just comparing plans</h2>
+    </div>
+    <div class="advantage-grid">
+      <div class="advantage-item" *ngFor="let item of advantages">
+        <span class="icon-badge" [class]="'tint-' + item.tint">{{ item.icon }}</span>
+        <b>{{ item.title }}</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Testimonials -->
+  <section class="testimonials">
+    <div class="section-heading">
+      <div><p class="eyebrow">REAL EXPERIENCES</p><h2>What Our Customers Are Saying</h2></div>
+    </div>
+    <div class="testimonial-grid">
+      <article class="quote" *ngFor="let testimonial of testimonials">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <div class="quote-author"><span class="avatar">{{ testimonial.initials }}</span><b>{{ testimonial.name }}</b></div>
+        <p>"{{ testimonial.quote }}"</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 14. Support -->
+  <section class="support-section" id="support">
+    <div class="support-copy">
+      <p class="eyebrow">WE'RE HERE TO HELP</p>
+      <h2>Have a question?<br>We're here to help.</h2>
+      <p class="lead">Need help comparing plans, renewing, understanding a claim or just general queries? Our support team is ready to help.</p>
+      <div class="support-actions">
+        <a class="btn-primary" href="tel:18001234567">Call us: 1800 123 4567</a>
+        <a class="quiet-link" href="mailto:support@surecover.com">Email us: support&#64;surecover.com</a>
+      </div>
+    </div>
+    <div class="support-visual" aria-hidden="true">
+      <div class="support-bubble">How can we help you today?</div>
+      <div class="support-scene">
+        <span class="support-avatar">🧑‍💼</span>
+        <span class="support-laptop">💻</span>
+        <span class="support-plant">🪴</span>
+      </div>
+    </div>
+  </section>
+
   <app-login-modal [isVisible]="showLoginModal()" (closeModal)="closeLoginModal()" (otpLogin)="handleOTPLogin($event)" (whatsappLogin)="handleWhatsAppLogin($event)" (googleLogin)="handleGoogleLogin()"></app-login-modal>
 </main>
